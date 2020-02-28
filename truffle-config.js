@@ -1,3 +1,8 @@
+const path = require("path");
+
+var mnemonic = "insect fantasy sand estate approve term force picture explain drift puzzle grape";
+var HDWalletProvider = require('./client/node_modules/truffle-hdwallet-provider');
+
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -25,6 +30,7 @@
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
 module.exports = {
+  contracts_build_directory: path.join(__dirname, "client/src/contracts"),
   /**
    * Networks define how you connect to your ethereum client and let you set the
    * defaults web3 uses to send transactions. If you don't specify one truffle
@@ -47,6 +53,14 @@ module.exports = {
       port: 8545,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
      },
+    rinkeby: {
+      provider: function() { 
+       return new HDWalletProvider(mnemonic, "https://rinkeby.infura.io/v3/e338bbabbb844ae7b424d646e407a24a");
+      },
+      network_id: 4,
+      gas: 6721977,
+      gasPrice: 4000000,
+  }
 
     // Another network with more advanced options...
     // advanced: {
